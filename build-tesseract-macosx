@@ -15,20 +15,20 @@ while [ "$1" ]; do
         esac
 done
 
-VER=3.01
+LEPTONICA_VERSION=1.71
+TESSERACT_VERSION=4.1.0
 
-PRISTINE=tesseract-$VER
+PRISTINE=tesseract-$TESSERACT_VERSION-pristine
 BUILD=tesseract-BUILD
-INSTALL=$PWD/tesseract-$VER-install
-LEPTONICA=$PWD/leptonica-1.69-install
+TESSERACT_INSTALL=$PWD/tesseract-$TESSERACT_VERSION-install
+LEPTONICA=$PWD/leptonica-$LEPTONICA_VERSION-install
 
 if [ ! -d $PRISTINE ]; then
-        wget http://tesseract-ocr.googlecode.com/files/tesseract-$VER.tar.gz
-        tar zxvf tesseract-$VER.tar.gz
+		git clone --branch $TESSERACT_VERSION --depth 1 https://github.com/tesseract-ocr/tesseract.git $PRISTINE
 fi
 
 if [ ! "$KEEP" ]; then
-        rm -rf $BUILD $INSTALL
+        rm -rf $BUILD $TESSERACT_INSTALL
         cp -a $PRISTINE $BUILD
 fi
 
@@ -38,7 +38,7 @@ cd $BUILD
 
 CFLAGS="-mmacosx-version-min=10.6"
 export CFLAGS
-./configure --prefix=$INSTALL --enable-static --disable-shared LIBLEPT_HEADERSDIR="$LEPTONICA/include" LDFLAGS="-L$LEPTONICA/lib" LIBS="-lpng -lz"
+./configure --prefix=$TESSERACT_INSTALL --enable-static --disable-shared LIBLEPT_HEADERSDIR="$LEPTONICA/include" LDFLAGS="-L$LEPTONICA/lib" LIBS="-lpng -lz"
 
 make
 
