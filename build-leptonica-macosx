@@ -1,0 +1,41 @@
+#! /bin/sh
+
+set -e
+
+while [ "$1" ]; do
+        case $1 in
+                -keep)
+                        KEEP=1
+                        shift
+                        ;;
+                *)
+                        echo "Unknown parameter: $1"
+                        exit 1
+                        ;;
+        esac
+done
+
+VER=1.69
+
+PRISTINE=leptonica-$VER
+BUILD=leptonica-BUILD
+INSTALL=$PWD/leptonica-${VER}-install
+
+if [ ! -d $PRISTINE ]; then
+        wget http://www.leptonica.com/source/leptonica-$VER.tar.gz
+        tar zxvf leptonica-$VER.tar.gz
+fi
+
+if [ ! "$KEEP" ]; then
+        rm -rf $BUILD $INSTALL
+        cp -a $PRISTINE $BUILD
+fi
+
+cd $BUILD
+
+./configure --prefix=$INSTALL -without-jpeg --without-libtiff --without-giflib LDFLAGS="-L/opt/local/lib" CPPFLAGS="-I/opt/local/include"
+
+make
+
+make install-strip
+

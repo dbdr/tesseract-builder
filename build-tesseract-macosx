@@ -1,0 +1,50 @@
+#! /bin/sh
+
+set -e
+
+while [ "$1" ]; do
+        case $1 in
+                -keep)  
+                        KEEP=1
+                        shift
+                        ;;
+                *)
+                        echo "Unknown parameter: $1"
+                        exit 1
+                        ;;
+        esac
+done
+
+VER=3.01
+
+PRISTINE=tesseract-$VER
+BUILD=tesseract-BUILD
+INSTALL=$PWD/tesseract-$VER-install
+LEPTONICA=$PWD/leptonica-1.69-install
+
+if [ ! -d $PRISTINE ]; then
+        wget http://tesseract-ocr.googlecode.com/files/tesseract-$VER.tar.gz
+        tar zxvf tesseract-$VER.tar.gz
+fi
+
+if [ ! "$KEEP" ]; then
+        rm -rf $BUILD $INSTALL
+        cp -a $PRISTINE $BUILD
+fi
+
+cd $BUILD
+
+./autogen.sh
+
+CFLAGS="-mmacosx-version-min=10.6"
+export CFLAGS
+./configure --prefix=$INSTALL --enable-static --disable-shared LIBLEPT_HEADERSDIR="$LEPTONICA/include" LDFLAGS="-L$LEPTONICA/lib" LIBS="-lpng -lz"
+
+make
+
+# The binary is not static, do that
+cd api
+g++ $CFLAGS -g -O2 -o tesseract tesseractmain.o -Wl,-bind_at_load  -L/Users/dbonniot/tesseract/leptonica-1.69-install/lib -L/opt/local/lib ./.libs/libtesseract.a -L./ -L../ -L../api -L../ccutil -L../viewer -L../cutil -L../image -L../ccstruct -L../dict -L../classify -L../wordrec -L../neural_networks/runtime -L../textord -L../cube -L../ccmain /Users/dbonniot/tesseract/leptonica-1.69-install/lib/liblept.a -lpthread /opt/local/lib/libpng15.a /opt/local/lib/libz.a
+cd ..
+
+make install-strip
