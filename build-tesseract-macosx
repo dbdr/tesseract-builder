@@ -15,8 +15,7 @@ while [ "$1" ]; do
         esac
 done
 
-LEPTONICA_VERSION=1.71
-TESSERACT_VERSION=4.1.0
+source ./versions.conf
 
 PRISTINE=tesseract-$TESSERACT_VERSION-pristine
 BUILD=tesseract-BUILD
