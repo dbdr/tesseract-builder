@@ -37,7 +37,7 @@ cd $BUILD
 
 CFLAGS="-mmacosx-version-min=10.6"
 export CFLAGS
-./configure --prefix=$TESSERACT_INSTALL --enable-static --disable-shared LEPTONICA_CFLAGS="-I$LEPTONICA/include" LEPTONICA_LIBS="-L$LEPTONICA/lib" LIBS="-lpng -lz"
+./configure --prefix=$TESSERACT_INSTALL --enable-static --disable-shared LEPTONICA_CFLAGS="-I$LEPTONICA/include -iquote $LEPTONICA/include/leptonica" LEPTONICA_LIBS="-L$LEPTONICA/lib" LIBS="-lpng -lz"
 
 make
 
