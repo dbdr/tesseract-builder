@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -x
 
 set -e
 
@@ -15,14 +15,14 @@ while [ "$1" ]; do
         esac
 done
 
-VER=1.69
+VER=1.71
 
 PRISTINE=leptonica-$VER
 BUILD=leptonica-BUILD
 INSTALL=$PWD/leptonica-${VER}-install
 
 if [ ! -d $PRISTINE ]; then
-        wget http://www.leptonica.com/source/leptonica-$VER.tar.gz
+        wget http://www.leptonica.org/source/leptonica-$VER.tar.gz
         tar zxvf leptonica-$VER.tar.gz
 fi
 
