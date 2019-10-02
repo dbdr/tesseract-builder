@@ -1,4 +1,4 @@
 os: osx
 language: cpp
 
-script: find / -name 'libpng*' && exit 1 && ./build-leptonica-macosx && ./build-tesseract-macosx
+script: ./build-leptonica-macosx && ./build-tesseract-macosx
