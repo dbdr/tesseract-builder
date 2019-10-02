@@ -43,7 +43,7 @@ make
 
 # The binary is not static, do that
 pushd src/api
-g++ $CFLAGS -g -O2 -o tesseract tesseract-tesseractmain.o -Wl,-bind_at_load  -L$LEPTONICA/lib -L/opt/local/lib ./.libs/libtesseract.a -L./ -L../ -L../api -L../ccutil -L../viewer -L../cutil -L../image -L../ccstruct -L../dict -L../classify -L../wordrec -L../neural_networks/runtime -L../textord -L../cube -L../ccmain $LEPTONICA/lib/liblept.a -lpthread /usr/local/lib/libpng16.a -llibz.a
+g++ $CFLAGS -g -O2 -o tesseract tesseract-tesseractmain.o -Wl,-bind_at_load  -L$LEPTONICA/lib -L/opt/local/lib ./.libs/libtesseract.a -L./ -L../ -L../api -L../ccutil -L../viewer -L../cutil -L../image -L../ccstruct -L../dict -L../classify -L../wordrec -L../neural_networks/runtime -L../textord -L../cube -L../ccmain $LEPTONICA/lib/liblept.a -lpthread /usr/local/lib/libpng16.a /usr/local/lib/libz.a
 popd
 
 make install-strip
