@@ -1,4 +1,4 @@
 os: osx
 language: cpp
 
-script: ./build-leptonica-macosx && ./build-tesseract-macosx
+script: find / -name libz.a 2>/dev/null | xargs ls -l && ./build-leptonica-macosx && ./build-tesseract-macosx
