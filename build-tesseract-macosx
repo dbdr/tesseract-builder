@@ -42,8 +42,8 @@ export CFLAGS
 make
 
 # The binary is not static, do that
-cd api
-g++ $CFLAGS -g -O2 -o tesseract tesseractmain.o -Wl,-bind_at_load  -L/Users/dbonniot/tesseract/leptonica-1.69-install/lib -L/opt/local/lib ./.libs/libtesseract.a -L./ -L../ -L../api -L../ccutil -L../viewer -L../cutil -L../image -L../ccstruct -L../dict -L../classify -L../wordrec -L../neural_networks/runtime -L../textord -L../cube -L../ccmain /Users/dbonniot/tesseract/leptonica-1.69-install/lib/liblept.a -lpthread /opt/local/lib/libpng15.a /opt/local/lib/libz.a
-cd ..
+pushd src/api
+g++ $CFLAGS -g -O2 -o tesseract tesseractmain.o -Wl,-bind_at_load  -L$LEPTONICA/lib -L/opt/local/lib ./.libs/libtesseract.a -L./ -L../ -L../api -L../ccutil -L../viewer -L../cutil -L../image -L../ccstruct -L../dict -L../classify -L../wordrec -L../neural_networks/runtime -L../textord -L../cube -L../ccmain $LEPTONICA/lib/liblept.a -lpthread -llibpng15.a -llibz.a
+popd
 
 make install-strip
