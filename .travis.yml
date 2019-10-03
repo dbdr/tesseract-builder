@@ -2,6 +2,6 @@ language: cpp
 
 os: osx
 # macOS 10.10
-osx_image: xcode6.4
+osx_image: xcode8
 
 script: ./build-leptonica-macosx && ./build-tesseract-macosx
