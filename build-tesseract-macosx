@@ -49,3 +49,4 @@ popd
 make install-strip
 
 otool -L $TESSERACT_INSTALL/bin/tesseract
+$TESSERACT_INSTALL/bin/tesseract tokkyo_P156.png stdout
