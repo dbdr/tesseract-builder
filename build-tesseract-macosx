@@ -47,3 +47,5 @@ g++ $CFLAGS -g -O2 -o tesseract tesseract-tesseractmain.o -Wl,-bind_at_load  -L$
 popd
 
 make install-strip
+
+otool -L $TESSERACT_INSTALL/bin/tesseract
