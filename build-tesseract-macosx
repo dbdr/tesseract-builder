@@ -50,4 +50,4 @@ make install-strip
 
 otool -L $TESSERACT_INSTALL/bin/tesseract
 wget 'https://github.com/tesseract-ocr/tessdata_fast/raw/master/eng.traineddata' -O $TESSERACT_INSTALL/share/tessdata/eng.traineddata
-$TESSERACT_INSTALL/bin/tesseract tokkyo_P156.png stdout
+$TESSERACT_INSTALL/bin/tesseract ../tokkyo_P156.png stdout
