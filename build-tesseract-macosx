@@ -35,7 +35,7 @@ cd $BUILD
 
 ./autogen.sh
 
-CFLAGS="-mmacosx-version-min=10.6"
+CFLAGS="-mmacosx-version-min=10.10"
 export CFLAGS
 ./configure --prefix=$TESSERACT_INSTALL --enable-static --disable-shared LEPTONICA_CFLAGS="-I$LEPTONICA/include -iquote $LEPTONICA/include/leptonica" LEPTONICA_LIBS="$LEPTONICA/lib/liblept.la" LIBS="-lpng -lz"
 
