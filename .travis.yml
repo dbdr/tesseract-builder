@@ -5,3 +5,9 @@ os: osx
 osx_image: xcode8
 
 script: ./build-leptonica-macosx && ./build-tesseract-macosx
+
+deploy:
+  provider: releases
+  api_key: $GH_OAUTH_TOKEN
+  file: tesseract.macos
+  skip_cleanup: true
